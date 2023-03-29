@@ -1,0 +1,82 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{amv}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0ce3e238f02fbbe60166bb44fdab2734}{%
+           family={Arbetsmiljöverket},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{0ce3e238f02fbbe60166bb44fdab2734}
+      \strng{fullhash}{0ce3e238f02fbbe60166bb44fdab2734}
+      \strng{bibnamehash}{0ce3e238f02fbbe60166bb44fdab2734}
+      \strng{authorbibnamehash}{0ce3e238f02fbbe60166bb44fdab2734}
+      \strng{authornamehash}{0ce3e238f02fbbe60166bb44fdab2734}
+      \strng{authorfullhash}{0ce3e238f02fbbe60166bb44fdab2734}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Risker med buller}
+      \field{urlday}{10}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.av.se/halsa-och-sakerhet/buller/risker-med-buller/
+      \endverb
+      \verb{url}
+      \verb https://www.av.se/halsa-och-sakerhet/buller/risker-med-buller/
+      \endverb
+    \endentry
+    \entry{hambley}{book}{}
+      \name{author}{1}{}{%
+        {{hash=7b1ff0a446b90a025dc7cd4968132741}{%
+           family={Hambley},
+           familyi={H\bibinitperiod},
+           given={A.\bibnamedelimi R.},
+           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Harlow, Storbritannien}%
+      }
+      \list{publisher}{1}{%
+        {Pearson Education Limited}%
+      }
+      \strng{namehash}{7b1ff0a446b90a025dc7cd4968132741}
+      \strng{fullhash}{7b1ff0a446b90a025dc7cd4968132741}
+      \strng{bibnamehash}{7b1ff0a446b90a025dc7cd4968132741}
+      \strng{authorbibnamehash}{7b1ff0a446b90a025dc7cd4968132741}
+      \strng{authornamehash}{7b1ff0a446b90a025dc7cd4968132741}
+      \strng{authorfullhash}{7b1ff0a446b90a025dc7cd4968132741}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{7}
+      \field{title}{Electrical Engineering: Principles and Applications}
+      \field{year}{2019}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

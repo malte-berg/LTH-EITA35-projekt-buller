@@ -1,0 +1,15 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'projekt.blg'
+[102] biber-darwin:340> INFO - === Tue Mar  7, 2023, 14:56:48
+[120] Biber.pm:418> INFO - Reading 'projekt.bcf'
+[246] Biber.pm:972> INFO - Found 2 citekeys in bib section 0
+[267] Biber.pm:4383> INFO - Processing section 0
+[282] Biber.pm:4574> INFO - Looking for bibtex file './sources.bib' for section 0
+[283] bibtex.pm:1713> INFO - LaTeX decoding ...
+[293] bibtex.pm:1518> INFO - Found BibTeX data source './sources.bib'
+[352] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[352] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[352] Biber.pm:4203> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[352] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[361] bbl.pm:654> INFO - Writing 'projekt.bbl' with encoding 'UTF-8'
+[364] bbl.pm:757> INFO - Output to projekt.bbl

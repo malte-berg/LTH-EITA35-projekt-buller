@@ -1,0 +1,298 @@
+\documentclass[12pt]{report}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+
+\hypersetup{
+    pdfborder={0 0 0}
+}
+\usepackage[style=numeric]{biblatex}
+\addbibresource{./sources.bib}
+\DefineBibliographyStrings{english}{%
+  urlseen = {Hämtad:} % replace "visited" with "hämtad"
+}
+
+\renewenvironment{abstract}
+  {\small\quotation\noindent\ignorespaces}
+  {\endquotation}
+
+% Redefine the chapter format
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{30\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \Huge\bfseries\thechapter\space\space% Remove "Chapter" and only include chapter number
+    \fi
+    \Huge\bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+
+\renewcommand{\contentsname}{Innehållsförteckning}
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\tablename}{Tabell}
+
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\figurename}{Figur}
+%-----------------------------
+\begin{document}
+\setcounter{secnumdepth}{3}
+
+\input{titlepage}
+
+\pagenumbering{gobble}% Remove page numbers (and reset to 1)
+\newpage
+\pagenumbering{arabic}% Arabic page numbers (and reset to 1)
+
+%\newgeometry{margin=2cm}
+\newgeometry{top=0.5cm}
+
+\chapter*{Abstract}
+\input{abstract}
+%\addcontentsline{toc}{chapter}{Abstract}
+\newpage
+\tableofcontents
+\newpage
+
+%1
+\chapter{Introduktion}
+\label{chap:intro}
+
+En bullerindikator är en ljudnivåmätare som används för att indikera störande och skadliga ljud. Den har många tillämpningar och kan användas på platser som skolor och på arbetsplatser där det ofta förekommer buller. 
+\\\\
+Det är viktigt för människor att inte utsättas för höga ljudnivåer, speciellt under lång tid eftersom det är skadligt för hälsan.\textsuperscript{\cite{amv}} De vanligaste konsekvenserna är trötthet, stress, irritation, försämrad koncentration och bestående hörselskador. Dessutom kan det vara mycket påfrestande för en individ som redan är hörselskadad.
+\\\\
+Målet med projektet är att konstruera en bullerindikator som tänder olika lysdioder beroende på ljudnivån. Denna typ av krets är enkel att avläsa eftersom lysdioderna tänds i ordning när deras gräns för ljudnivån har överskridits.  
+\\\\
+Syftet med projektet är att få en djupare förståelse för hur mer avancerade kretsar kan konstrueras, samt att söka information och få kunskap om hur de olika komponenterna kan användas för att skapa en bullerindikator.
+\\\\
+Följande delar av projektrapporten kommer att inledas med teori om bullerindikatorn och hur den fungerar. Sedan beskrivs det hur kretsen konstrueras i metodkapitlet. Därefter kommer resultaten av projektet samt en diskussion kring dem. Avslutligen inkluderas källförteckning och bilagor.
+
+%2
+\chapter{Teori}
+\label{chap:teori}
+En bullerindikator kommer bestå av ett högpassfilter, en förstärkare, en precisionlikriktare, en RC-krets, komparatorer och lysdioder. Deras funktion och eventuella formler som används i projektet kommer att förklaras under respektive avsnitt.
+
+%2.1
+\section{Kretsschema}
+\label{sec:circ}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{bilder/circuit-numbered.png}
+  %\caption{Schematik på den färdiga bullerindikatorn}
+  \label{fig:circuit}
+\end{figure}
+
+\noindent Figur 1: Kretsschema för kretsen som ska konstrueras. Bullerindikatorn ska bestå av en mikrofon med en 6 V matningsspänning som kopplas till ett högpassfilter som sedan vidarekopplas till OP-förstärkaren. AC-spänningen som kommer ut ur OP-förstärkaren likriktas till en DC-spänning med en precisionlikriktare. Denna spänningen ska sedan kopplas in i komparatorerna som ska jämföra den med referensspänningen på respektive komparator. OP-förstärkarna ska dela samma matningsspänning $V_{cc}$ på $\pm18$ V. Siffrorna från 1-4 refererar till kretsens olika större funktioner och delar som beskrivs i \hyperref[sec:parts]{kapitel 2.2}. Ett kretsschema utan siffror återfinns i avsnittet \hyperref[chap:bilagor]{Bilagor}.
+
+%2.2
+\newgeometry{top=2cm}
+\section{Kretsen uppdelad}
+\label{sec:parts}
+Nedan beskrivs kretsen uppdelad i dess olika större funktioner och delar.
+
+%2.2.1
+\subsection{Högpassfilter}
+\label{subsec:filter}
+Högpassfiltret tillåter signaler med hög frekvens att passera men reducerar signaler med låg frekvens. Kretsen för högpassfiltret återfinns vid siffra 1 i \hyperref[fig:circuit]{Figur 1}. Den grundläggande tanken med högpassfiltret i denna krets är att filtrera bort frekvenser under mikrofonens skala: 20-16000 Hz. Notera att frekvenser över 20 kHz inte går att höras av människor. Syftet med att filtrera bort låga frekvenser är för att undvika att ta upp dova frekvenser under mikrofonens skala, filtrera bort DC-spänningar från eventuella DC-spänningskällor, samt ge en renare signal att arbeta med. Brytfrekvens kan beräknas med sambandet $\omega_b=\frac{1}{R C}$ \label{eq:wb}(ekv. 1) där $\omega_b$ är brytfrekvens, $R$ är resistansen och $C$ är kapacitansen\textsuperscript{\cite{hambley}}.
+
+%2.2.2
+\subsection{V-V-förstärkare}
+\label{subsec:ampl}
+En V-V-förstärkare förstärker insignalen, men behåller insignalens egenskaper, såsom vågform och frekvens.
+\\\\
+Den grundläggande strukturen innehåller en OP-förstärkare och två resistanser. Insignalen är kopplad till den icke inverterande terminalen på OP-förstärkaren. En av resistorerna är negativt återkopplad från den inverterande terminalen till utgångsterm- inalen. Den andra resistorn är kopplad från den inverterande terminalen till jord. 
+\\\\
+Förstärkningen kan uppskattas med sambandet $Gain = \frac{R_2}{R_1}+1$ \label{eq:gain}(ekv. 2) där $R_2$ är den negativt återkopplade resistansen, och $R_1$ är resistansen kopplad till jord.\textsuperscript{\cite{hambley}}
+
+%2.2.3
+\subsection{Precisionlikriktare}
+\label{subsec:rect}
+En precisionlikriktare är en typ av elektronisk krets som idealt omvandlar AC- till DC-spänning, samt minskar fel och distorsion. Syftet med likriktaren i denna krets är att öka frekvensen på spänningen till en nivå som gör det svårt att uppfatta lysdiodens jitter som uppstår på grund av AC-spänningen från mikrofonen.
+\\\\
+Det grundläggande konceptet bakom likriktaren är att använda en OP-förstärkare i en uppställning som tillåter insignalen att likriktas med hög precision. Denna krets implementeras med en negativ återkoppling på den inverterande terminalen samt med en diod vid utgången på förstärkaren. När insignalen är på positiv vågcykel blir utspänningen ur OP-förstärkaren negativ och dioden blir framspänd och OP-förstärkaren blir kortsluten. Insignalen går då istället genom feedback-loopen och ger en positiv utspänning. Däremot om insignalen är negativ så blir utspänningen positiv och dioden leder en positiv spänning. 
+\\\\
+Utspänningen för en precisionlikriktare följer därmed sambandet $V_{out}=\left|V_{in}\right|$ \label{eq:rect}(ekv. 3) där $V_{out}$ är utspänningen och $V_{in}$ är insignalen.\textsuperscript{\cite{hambley}}
+
+
+%2.2.4
+\subsection{Komparatorer och lysdioder}
+\label{subsec:komp}
+Komparatorkretsen är en serie av parallellkopplade komparatorer med olika referensspänningar i en stegrande ordning för att skapa olika spänningsnivåer. Syftet med de olika nivåerna är att skapa en sorts strömbrytare för lysdioderna att tändas då den förstärkta insignalen från mikrofonen når den definierade nivån. Referensspänningarna definieras med en spänningskälla som är spänningsdelad mellan komparatorerna.
+
+\newgeometry{top=0.5cm}
+%3
+\chapter{Metod}
+\label{chap:method}
+Nedan beskrivs vilka komponenter som användes i kretsen samt vilka steg som togs för att testa och konstruera kretsen.
+
+%3.1
+\section{Preliminära kretsar}
+\label{sec:prel}
+\subsection{Krets med transistorer}
+I början konstruerades en preliminär kretsmodell, med transistorer som strömbrytare och mikrofonens spänning som grundspänning, enligt \hyperref[fig:bil1]{Figur 4} i \hyperref[chap:bilagor]{Bilagor}. Den kretsen konstruerades genom att koppla spänningen från mikrofonen till grindterminalen på respektive transistor som jämförs med referensspänningen på transistorn. Då spänningen från mikrofonen överskrider transistorns referensspänning så blir det en sluten krets och respektive LED lyses upp. Referensspänningen kom från en spänningskälla kopplad både till dioderna och transistorn. Då denna modellen övergavs för den slutgiltiga kretsen i \hyperref[fig:circuit]{Figur 1} då transistorkretsen visade problem som ansågs vara svårhanterade jämfört med den simplare slutliga kretsen. De problem som uppstod var bland annat en svårighet att definiera ljudnivåer. Mängden seriekopplade dioder gav en stor och svårhanterad knäspänning. Dessutom fungerade inte strömbrytaren, då varje enskild lampa tändes vid samma gräns. Orsaken var sannolikt antingen att spänningsnivåerna var dåligt definierade eller att det var en felaktig spänningsdelning in till transistoremittern.
+
+\subsection{Krets med brygglikriktare}
+Ursprungligen skulle en brygglikriktare användas vilket är en likriktare uppbyggd av 4 dioder som är anslutna i en brygga. Den klarar höga spänningar och strömmar. Modellen blev svårhanterad då oscilloskopet inte kunde hantera mätningar från likriktaren. Orsaken beror väsentligen på att brygglikriktarens spänning behöver mätas över två utgångsterminaler, medan oscilloskopet endast kan hantera mätningar över en utgångsterminal. Detta resulterade i svårigheter att avgöra ifall kretsen gav de önskade mätvärdena. Anledning till detta var att likriktaren visar endast rätt värden då både positiva och negativa polen över lasten mättes eftersom den gav ut två olika utsignaler, en positiv och en negativ. Oscilloskopets mätprob innehåller en jordning och gjorde det omöjligt att få korrekta värden. Denna modellen övergavs för precisionlikrikaren då den endast har en utgående signal och kunde mätas på oscilloskopet.
+\\\\\\\\\\\
+\section{Slutgiltig krets}
+\label{sec:final}
+I den slutgiltiga kretsen användes en tvåkanals operationsförstärkare av typen \\TLC072CP för att förstärka signalen från mikrofonen på ena kanalen, samt för att konstruera precisionlikriktaren på den andra kanalen. Mikrofonen som valdes var en mikrofon av elektrettyp (modellnummer RND 770-00011). En fyrkanals operationsförstärkare av typen TLC074IN användes för konstruktion av komparatorkretsen. De lysdioder som användes var en röd lysdiod (modellnummer RND 135-00126), två stycken gula lysdioder (modellnummer RND 135-00127) och en grön lysdiod (modellnummer RND 135-00122). Resterande kondensatorer och resistorer samt spänningskällor och deras respektive värden kan ses i kretsschemat i \hyperref[fig:circuit]{Figur 1}.
+
+\section{Konstruktion och mätningar}
+\label{sec:construct}
+Mikrofonen fick en matningsspänning på 5 V enligt databladets specifikation. Vidare kopplades spänningen till ett högpassfilter som både filtrerar bort DC-spänningen som kom från matningsspänningen till mikrofonen, samt tar bort spänningar från lägre frekvenser än mikrofonens skala. En resistor på 10 k$\Omega$ och en kondensator på 100 $\mu$F användes för att konstruera den. Högpassfiltret tilldelas då med hjälp av \hyperref[eq:wb]{ekv. 1} ett lågt värde av $\omega_b=\frac{1}{R C}=\frac{1}{10^4\times10^{-5}}=10$ rad/s.
+\\\\
+AC-spänningen från mikrofonen fördes sedan vidare in i OP-förstärkaren och förstärktes med en förstärkning på $Gain = \frac{R_2}{R_1}+1=\frac{2.2*10^5}{1*10^3}+1 = 221$, som uppnåddes enligt \hyperref[eq:gain]{ekv. 2}. Den förstärkta växelströmmen som kom ut blev sedan kopplad till den inverterande terminalen på fullvågsrektifierarens OP-förstärkare och matade ut en DC-spänning till en serie av parallellkopplade komparatorer på den icke-inverterande terminalen, då för att jämföra med referensspänningarna som var kopplade till den inverterande terminalen. Effekten av likriktaren kan ses skillnaden mellan \hyperref[fig:efterf]{Figur 2} och \hyperref[fig:lik]{Figur 3}. Fullvågslikriktaren har en kondensator som lagrar spänningen från utspänningen, och behåller spänningens amplitud en kortare tid. Komparatorernas teoretiska referensspänningar var vid en inspänning på 9 V:  7 V,  5,5 V, 4 V samt 1,3 V. Referensspänningarna bestämdes genom att testa och jämföra med ljudnivåer tills en rimlig gräns uppnåddes.
+\\\\
+Mätningarna utfördes genom att tala in i mikrofonen i olika ljudnivåer som approximerades med hjälp av en app på telefonen. Oscilloskopets prober kopplades till insignalen på förstärkaren, utsignalen på förstärkaren samt till utsignalen på precisionslikriktaren.
+
+%4
+\chapter{Resultat}
+\label{chap:res}
+Värdena från oscilloskopet som mättes före och efter förstärkningen på signalen är
+noterade nedan i \hyperref[tab:res1]{Tabell 1} och \hyperref[tab:res2]{Tabell 2}. Ljudnivåerna representerar de definierade nivåerna som respektive diod tänds på. Vid den lägsta ljudnivån är ingen diod tänd. Därefter tänds den gröna lysdioden, sedan de gula lysdioderna och till sist den röda lysdioden. Den approximerade ljudnivån var olika starka ljud, representerade i dB. Utspänningen är representerad i mV respektive V, för respektive utspänning. Frekvensen var uppmätt på utspänningen. Notera att ljudnivån startades på 30 dB då ett helt tyst rum var omöjligt att uppnå. 
+\\\\
+Spänningen når sitt maximala värde vid 85 dB då utspänningen når ett maximum av $\pm18$ V enligt matningsspänningen efter förstärkning, vilket kan ses i \hyperref[tab:res2]{Tabell 2}.
+
+
+\begin{table}[h]
+  \caption{Mätningar utförda innan förstärkning och likriktning av mikrofonsignalen}
+  \centering
+  \label{tab:res1}
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    Ljudnivå & Approx. ljudnivå (dB) & Utspänning (mV) & Frekvens (Hz) \\
+    \hline
+    Tyst & 30 & 0 & - \\
+    \hline
+    Låg & 40 & 20 & 10-100 \\
+    \hline
+    Mellan & 55 & 100 & 700 \\
+    \hline
+    Hög & 65 & 150 & 1200 \\
+    \hline
+    Skadligt & 85 & 300 & 1600-2000 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[h]
+  \caption{Mätningar utförda efter förstärkning och likriktning av mikrofonsignalen}
+  \centering
+  \label{tab:res2}
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Ljudnivå & Approx. ljudnivå (dB) & Utspänning (V) & Frekvens (Hz) & Lysdiod \\
+    \hline
+    Tyst & 30 & 0 & - & - \\
+    \hline
+    Låg & 40 & 10 & - & Grön \\
+    \hline
+    Mellan & 55 & 14 & - & Gul \#1 \\
+    \hline
+    Hög & 65 & 15 & - & Gul \#2 \\
+    \hline
+    Skadligt & 85 & 18 & - & Röd \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\setcounter{figure}{1}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{bilder/efter.png}
+  \caption{Figuren visar förhållandet mellan spänning (V) och tid (s) efter förstärkning på en ordinär ljudnivå/insignal.}
+  \label{fig:efterf}
+\end{figure}
+
+\begin{figure}[ht]
+  \label{fig:lik}
+  \centering
+  \includegraphics[width=0.8\textwidth]{bilder/lik.png}
+  \caption{Figuren visar förhållandet mellan spänning (V) och tid (s) efter likriktning på en ordinär ljudnivå/insignal.}
+\end{figure}
+
+%5
+\chapter{Diskussion}
+\label{chap:disc}
+
+\section{Diskussion om resultat}
+\label{sec:discres}
+\hyperref[tab:res2]{Tabell 2} visar att den gröna lysdioden tänds vid 40 dB, vilket kan jämföras med en tystare konversation på avstånd. När ljudnivån överskrider 55 dB tänds den första gula lysdioden och vid 65 dB tänds den andra, vilket kan liknas med ett normalt samtal. Beroende på hur högt samtalet är och hur känslig individen är kan dessa ljud upplevas som störande. Den sista lysdioden, det vill säga den röda lysdioden, tänds vid ljud över 85 dB som förekommer från gatutrafik eller storstadsgata. Dessa ljud kan upplevas som störande och vara skadliga för människor beroende på tiden man blir exponerad för dem.  
+\\\\
+Frekvensen i \hyperref[tab:res1]{Tabell 1} refererar till spänningens frekvens. Efter likriktning blir denna odefinierad, vilket kan ses i \hyperref[tab:res2]{Tabell 2}. Om likriktaren inte användes skulle frekvensen kvarstå vilket skulle innebära att lysdioderna hade blinkat och inte lyst med ett konstant ljus.
+
+
+\section{Diskussion om resultat utifrån teori}
+\label{sec:disctheory}
+Projektet visar resultat i praktiken som är enligt teorin i avsnittet \hyperref[chap:method]{Metod}. Varje sektion av kretsen uppfyller dess funktion, vilket visas i avsnittet \hyperref[chap:res]{Resultat}. Förstärkningens effekt kan ses i \hyperref[tab:res1]{Tabell 1} och \hyperref[tab:res2]{Tabell 2}. Amplitud samt frekvens på det uppmätta ljudet ses i \hyperref[fig:efterf]{Figur 2}, och likriktarens effekt i \hyperref[fig:lik]{Figur 3}. Mätningarna gav inte samma värden som de teoretiska värdena, men var ändå inom rimlig närhet.
+\\\\
+I figur 6 visar kretsen ett par omöjliga mätvärden där spänningen går från minimala spänningen till den maximala omedelbart då spänningens lutning ändrar tecken. Detta kan bero biasering på dioden i likriktaren då dioden går från backspänd till framspänd och vice versa. Det kan hanteras med en extra diod som kan uppfylla funktionen av en feedback-loop, men det är onödigt att hantera i denna krets, då kretsen kan hantera felmarginalen. Det är viktigt att notera att likriktarens samband i \hyperref[eq:rect]{(ekv. 3)} bara gäller under ideala förhållande och faktorer som diodens icke-linjäritet, insignalens offset-spänning och temperaturen kan påverka likriktarens prestanda. Likriktaren behåller hög precision eftersom att OP-förstärkaren kompenserar för diodens knäspänning. Detta är inte idealt då OP-förstärkarens kompensation beror på spänningsfallet över dioden, och introducerar alltså en icke-linjär funktion till kretsen. Detta är dock mer eller mindre försumbart i denna krets. 
+\\\\\\\\\\
+I Tabell 1 och 2 visas förhållandet mellan inspänningen, ljudnivån och utspänningen men dessa mätvärden i förhållande till den uträknade förstärkningen kan ifrågasättas. I tabellen gav en ljudnivå av 50 dB en utspänning på 100mV till 14 V före och efter förstärkningen. Då förstärkningen konstaterades vara 221 så förutsätts utspänningen till att bli $\pm V_{cc}$ på 18 V men den blev bara 14 V, alltså en förstärkning på 140. Orsaken kan bero på att resistansen på feedback-loopen är väldigt stor, 220 k$\Omega$ och orsakar ett läckage av ström, vilket leder till ett fel i spänningen. Om en läcka av 1 $\mu$A uppstår, med en resistans på 1 M$\Omega$ över feedback-loopen, skulle det uppge ett fel på 1 V. Även detta ifrågasattes då felet inte bör vara stort nog för att skapa ett så stort fel i mätningarna, så anledningen bakom felkällan är därför okänd.
+
+\section{Felkällor}
+\label{sec:faulty}
+De felkällor som kan ha påverkat resultatet är komponentvariationer, felaktig avläsning från oscilloskopet, samt variationer på mikrofonen. T.ex har spänningsmätningarna en felmarginal på ca $\pm$ 3-5 \%, vilket är  oscilloskopets felmarginal.
+\\\\
+Mätningar i \hyperref[tab:res1]{Tabell 1} och \hyperref[tab:res2]{Tabell 2} för olika decibelnivåer fördes, men de var inte precisa. Anledningen var för att förhållandet mellan decibelnivåerna och utspänningen inte var mätt jämsides, utan de approximerades separat under olika tillfällen.
+
+
+\section{Eventuella utvecklingar och tillämpningar}
+\label{sec:better}
+Kretsen som har designats kan tillämpas till flertalet applikationer, och utvecklas om det behövs. Kretsen mäter och jämför inmatningsspänningen, och matar ut ett värde baserat på detta. Med modifiering kan det användas som en analog till digital omvandlare. Bullerindikatorns utmatning är inte i bitar, men kan omvandlas med smärre förändringar. Det går till exempel att addera fler grenar till spänningsfördelningarna. Även enskilda moduler av kretsen kan användas, som likriktaren och V-V förstärkaren då de inte bygger på principer specifikt för projektet utan kan användas till flera olika kretsar.
+
+\section{Slutsats}
+\label{sec:summary}
+Den färdiga kretsen fungerar enligt målet, vilket var att med en mikrofon tända olika lysdioder som representerar olika ljudnivåerna. Dock uppfyllde denna krets inte den egentliga uppgiften för projektet fullständigt. Projektet syftar på en bullerindikator som ska indikera bullernivå medan den byggda kretsen istället indikerar generell ljudnivå på hela frekvensspektrumet. Detta kunde åtgärdas genom att implementera ett bandpassfilter med syfte att endast låta lågfrekvent buller förstärkas. Ty, brist på tid samt att bullerindikatorn dömdes godkänd i syfte till projektet så tillämpades aldrig denna idé. 
+\\\\\\\\
+Slutsatsen av projektet är att en fungerande bullerindikator har konstruerats. Dessutom är kretsen enkel att avläsa eftersom olika lysdioder tänds beroende på ljudnivån. Dessa ljudnivåer är också passande utifrån vad en människa kan uppleva som störande eller inte. Därmed har syftet med projektet blivit uppfyllt. 
+
+
+\chapter*{Källförteckning}
+\addcontentsline{toc}{chapter}{Källförteckning}
+\label{chap:source}
+\printbibliography[heading=none]
+
+
+\chapter*{Bilagor}
+\addcontentsline{toc}{chapter}{Bilagor}
+\label{chap:bilagor}
+\setcounter{figure}{3}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{bilder/bilaga1.png}
+  \caption{Övergiven kretsmodell}
+  \label{fig:bil1}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{bilder/bilaga2.png}
+  \caption{Övergiven modell för lysdioder}
+  \label{fig:bil2}
+\end{figure}
+
+\begin{figure}[ht]
+  \label{fig:circuitfix}
+  \centering
+  \includegraphics[width=0.8\textwidth]{bilder/circuit_fix.png}
+  \caption{Slutgiltig kretsmodell utan numrering av kretsens olika huvuddelar}
+\end{figure}
+
+\begin{figure}[ht]
+  \label{fig:innanf}
+  \centering
+  \includegraphics[width=0.8\textwidth]{bilder/innan.png}
+  \caption{Figuren visar förhållandet mellan spänning (V) och tid (s) innan förstärkning på en ordinär ljudnivå/insignal.}
+\end{figure}
+
+\end{document}

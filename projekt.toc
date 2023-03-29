@@ -1,0 +1,23 @@
+\contentsline {chapter}{\numberline {1}Introduktion}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Teori}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Kretsschema}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Kretsen uppdelad}{5}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Högpassfilter}{5}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}V-V-förstärkare}{5}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Precisionlikriktare}{5}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Komparatorer och lysdioder}{6}{subsection.2.2.4}%
+\contentsline {chapter}{\numberline {3}Metod}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Preliminära kretsar}{7}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Krets med transistorer}{7}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Krets med brygglikriktare}{7}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Slutgiltig krets}{8}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Konstruktion och mätningar}{8}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Resultat}{9}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Diskussion}{11}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Diskussion om resultat}{11}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Diskussion om resultat utifrån teori}{11}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Felkällor}{12}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Eventuella utvecklingar och tillämpningar}{12}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Slutsats}{12}{section.5.5}%
+\contentsline {chapter}{Källförteckning}{14}{chapter*.3}%
+\contentsline {chapter}{Bilagor}{15}{chapter*.4}%
